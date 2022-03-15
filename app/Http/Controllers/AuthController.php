@@ -12,15 +12,16 @@ class AuthController extends Controller
     public function signup(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
+            'username' => 'required|string',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string',
         ]);
 
         $user = new User([
-            'name' => $request->name,
+            'username' => $request->username,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'verified' => now(),
         ]);
         $user->save();return response()->json([
             'message' => 'Usuario Creado Satisfactoriamente!',
@@ -57,8 +58,8 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->token()->revoke();        return response()->json([
-            'message' => 'Cerrado de Sesión Satisfactorio.'
+        $request->user()->token()->revoke();return response()->json([
+            'message' => 'Cerrado de Sesión Satisfactorio.',
         ]);
     }
 

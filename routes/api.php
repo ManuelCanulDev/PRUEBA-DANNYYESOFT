@@ -20,4 +20,5 @@ Route::group([
     Route::post('reset', 'PasswordResetController@reset');
 });
 
-Route::resource('tw_documentos','TwDocumentosController');
+Route::resource('tw_documentos','TwDocumentosController')->middleware('auth:api');
+Route::resource('tw_users','UserController')->middleware('auth:api');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\tw_contactos_corporativos;
 use Illuminate\Http\Request;
 
+
 class TwContactosCorporativosController extends Controller
 {
     /**
