@@ -23,7 +23,7 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
         $user->save();return response()->json([
-            'message' => 'Successfully created user!',
+            'message' => 'Usuario Creado Satisfactoriamente!',
         ], 201);
     }
 
@@ -36,7 +36,7 @@ class AuthController extends Controller
         ]);
         $credentials = request(['email', 'password']);if (!Auth::attempt($credentials)) {
             return response()->json([
-                'message' => 'Unauthorized',
+                'message' => 'Acceso no Autorizado.',
             ], 401);
         }
 
@@ -58,7 +58,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();        return response()->json([
-            'message' => 'Successfully logged out'
+            'message' => 'Cerrado de Sesión Satisfactorio.'
         ]);
     }
 

@@ -27,7 +27,7 @@ class PasswordResetController extends Controller
 
         $user = User::where('email', $request->email)->first();if (!$user) {
             return response()->json([
-                'message' => 'We cant find a user with that e-mail address.',
+                'message' => 'No podemos encontrar un usuario con esa dirección de correo electrónico.',
             ], 404);
         }
 
@@ -43,7 +43,7 @@ class PasswordResetController extends Controller
             );
         }
         return response()->json([
-            'message' => 'We have e-mailed your password reset link!',
+            'message' => '¡Le hemos enviado por correo electrónico su enlace de restablecimiento de contraseña!',
         ]);
     }/**
      * Find token password reset
@@ -57,13 +57,13 @@ class PasswordResetController extends Controller
         $passwordReset = PasswordReset::where('token', $token)
             ->first();if (!$passwordReset) {
             return response()->json([
-                'message' => 'This password reset token is invalid.',
+                'message' => 'Este token de restablecimiento de contraseña no es válido.',
             ], 404);
         }
         if (Carbon::parse($passwordReset->updated_at)->addMinutes(720)->isPast()) {
             $passwordReset->delete();
             return response()->json([
-                'message' => 'This password reset token is invalid.',
+                'message' => 'Este token de restablecimiento de contraseña no es válido.',
             ], 404);
         }return response()->json($passwordReset);
     }/**
@@ -88,13 +88,13 @@ class PasswordResetController extends Controller
             ['email', $request->email],
         ])->first();if (!$passwordReset) {
             return response()->json([
-                'message' => 'This password reset token is invalid.',
+                'message' => 'Este token de restablecimiento de contraseña no es válido.',
             ], 404);
         }
 
         $user = User::where('email', $passwordReset->email)->first();if (!$user) {
             return response()->json([
-                'message' => 'We cant find a user with that e-mail address.',
+                'message' => 'No podemos encontrar un usuario con esa dirección de correo electrónico.',
             ], 404);
         }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\tw_documentos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TwDocumentosController extends Controller
 {
@@ -14,17 +15,10 @@ class TwDocumentosController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json([
+            'success' => false,
+            'data' => tw_documentos::paginate(5),
+        ], 200);
     }
 
     /**
@@ -35,7 +29,28 @@ class TwDocumentosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'S_Nombre' => 'required',
+            'N_Obligatorio' => 'required',
+            'S_Descripcion' => 'required',
+        ];
+
+        $input = $request->all();
+
+        $validator = Validator::make($input, $rules);
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'error' => $validator->errors()->all()], 406);
+        } else {
+
+            $tw_documento = new tw_documentos();
+            $tw_documento->S_Nombre = $request->S_Nombre;
+            $tw_documento->N_Obligatorio = $request->N_Obligatorio;
+            $tw_documento->S_Descripcion = $request->S_Descripcion;
+            $tw_documento->save();
+
+            return response()->json(['success' => true, 'data' => $tw_documento], 200);
+        }
     }
 
     /**
@@ -44,20 +59,20 @@ class TwDocumentosController extends Controller
      * @param  \App\tw_documentos  $tw_documentos
      * @return \Illuminate\Http\Response
      */
-    public function show(tw_documentos $tw_documentos)
+    public function show($id)
     {
-        //
-    }
+        if (tw_documentos::find($id)) {
+            return response()->json([
+                'success' => true,
+                'data' => tw_documentos::find($id),
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'data' => [],
+            ], 404);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\tw_documentos  $tw_documentos
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(tw_documentos $tw_documentos)
-    {
-        //
     }
 
     /**
@@ -67,9 +82,35 @@ class TwDocumentosController extends Controller
      * @param  \App\tw_documentos  $tw_documentos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, tw_documentos $tw_documentos)
+    public function update(Request $request, $id)
     {
-        //
+        $doc = tw_documentos::find($id);
+
+        if ($doc) {
+            $rules = [
+                'S_Nombre' => 'required',
+                'N_Obligatorio' => 'required',
+                'S_Descripcion' => 'required',
+            ];
+
+            $input = $request->all();
+
+            $validator = Validator::make($input, $rules);
+
+            if ($validator->fails()) {
+                return response()->json(['success' => false, 'error' => $validator->errors()->all()], 406);
+            } else {
+                $tw_documento = tw_documentos::find($id);
+                $tw_documento->S_Nombre = $request->get('S_Nombre');
+                $tw_documento->N_Obligatorio = $request->get('N_Obligatorio');
+                $tw_documento->S_Descripcion = $request->get('S_Descripcion');
+                $tw_documento->save();
+
+                return response()->json(['success' => true, 'data' => $tw_documento], 200);
+            }
+        } else {
+            return response()->json(['success' => true, 'data' => 'NOT FOUND'], 404);
+        }
     }
 
     /**
@@ -78,8 +119,15 @@ class TwDocumentosController extends Controller
      * @param  \App\tw_documentos  $tw_documentos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(tw_documentos $tw_documentos)
+    public function destroy($id)
     {
-        //
+        $doc = tw_documentos::find($id);
+
+        if ($doc) {
+            $doc->delete();
+            return response()->json(['success' => true, 'data' => 'OK'], 202);
+        } else {
+            return response()->json(['success' => true, 'data' => 'NOT FOUND'], 404);
+        }
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\tw_documentos;
 use Illuminate\Database\Seeder;
 
 class TwDocumentosSeeder extends Seeder
@@ -11,6 +12,6 @@ class TwDocumentosSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(tw_documentos::class, 10)->create();
     }
 }

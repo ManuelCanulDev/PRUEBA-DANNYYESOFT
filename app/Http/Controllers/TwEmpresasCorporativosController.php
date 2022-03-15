@@ -18,16 +18,6 @@ class TwEmpresasCorporativosController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -45,17 +35,6 @@ class TwEmpresasCorporativosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(tw_empresas_corporativos $tw_empresas_corporativos)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\tw_empresas_corporativos  $tw_empresas_corporativos
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(tw_empresas_corporativos $tw_empresas_corporativos)
     {
         //
     }

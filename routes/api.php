@@ -8,13 +8,8 @@ Route::group([
 ], function () {
     Route::post('login', 'AuthController@login');
     Route::post('signup', 'AuthController@signup');
-
-    Route::group([
-        'middleware' => 'auth:api',
-    ], function () {
-        Route::get('logout', 'AuthController@logout');
-        Route::get('user', 'AuthController@user');
-    });
+    Route::get('logout', 'AuthController@logout')->middleware('auth:api');
+    Route::get('user', 'AuthController@user')->middleware('auth:api');
 });
 
 Route::group([
@@ -24,3 +19,5 @@ Route::group([
     Route::get('find/{token}', 'PasswordResetController@find');
     Route::post('reset', 'PasswordResetController@reset');
 });
+
+Route::resource('tw_documentos','TwDocumentosController');
