@@ -25,3 +25,4 @@ Route::resource('tw_users','UserController')->middleware('auth:api');
 Route::resource('tw_corporativos','TwCorporativosController')->middleware('auth:api');
 Route::resource('tw_contratos_corporativos','TwContratosCorporativosController')->middleware('auth:api');
 Route::resource('tw_documentos_corporativos','TwDocumentosCorporativosController')->middleware('auth:api');
+Route::resource('tw_empresas_corporativos','TwEmpresasCorporativosController')->middleware('auth:api');

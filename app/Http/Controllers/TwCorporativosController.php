@@ -32,14 +32,14 @@ class TwCorporativosController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'SNombreCorto' => 'required|string',
-            'SNombreCompleto' => 'required|string',
-            'SDBName' => 'required|string',
-            'SDBUsuario' => 'required|string',
-            'SDBPassword' => 'required|string',
-            'SSystemUrl' => 'required|string',
-            'SActivo' => 'required|string',
-            'DFechaIncorporacion' => 'required',
+            'S_NombreCorto' => 'required|string',
+            'S_NombreCompleto' => 'required|string',
+            'S_DBName' => 'required|string',
+            'S_DBUsuario' => 'required|string',
+            'S_DBPassword' => 'required|string',
+            'S_SystemUrl' => 'required|string',
+            'S_Activo' => 'required|string',
+            'D_FechaIncorporacion' => 'required',
             'tw_usuarios_id' => 'required'
         ];
 

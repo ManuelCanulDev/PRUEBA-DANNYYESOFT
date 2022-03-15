@@ -27,7 +27,7 @@ class CreateTwEmpresasCorporativosTable extends Migration
             $table->string('S_UrlRFC',255)->nullable();
             $table->string('S_UrlActaConstitutiva',255)->nullable();
             $table->tinyInteger('S_Activo');
-            $table->string('S_Comentarios',255);
+            $table->string('S_Comentarios',255)->nullable();
             $table->unsignedBigInteger('tw_corporativos_id');
             $table->foreign('tw_corporativos_id')->references('id')->on('tw_corporativos');
             $table->timestamps();
