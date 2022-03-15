@@ -27,3 +27,5 @@ Route::resource('tw_contratos_corporativos','TwContratosCorporativosController')
 Route::resource('tw_documentos_corporativos','TwDocumentosCorporativosController')->middleware('auth:api');
 Route::resource('tw_empresas_corporativos','TwEmpresasCorporativosController')->middleware('auth:api');
 Route::resource('tw_contactos_corporativos','TwContactosCorporativosController')->middleware('auth:api');
+
+Route::get('corporativos/{id}','TwCorporativosController@obtenerCorporativo')->middleware('auth:api');

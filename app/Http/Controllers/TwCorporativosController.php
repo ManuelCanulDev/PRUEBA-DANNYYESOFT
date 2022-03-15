@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TwCorporativoResource;
 use App\tw_corporativos;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 class TwCorporativosController extends Controller
 {
@@ -40,7 +39,7 @@ class TwCorporativosController extends Controller
             'S_SystemUrl' => 'required|string',
             'S_Activo' => 'required|string',
             'D_FechaIncorporacion' => 'required',
-            'tw_usuarios_id' => 'required'
+            'tw_usuarios_id' => 'required',
         ];
 
         $input = $request->all();
@@ -108,7 +107,7 @@ class TwCorporativosController extends Controller
             'SSystemUrl' => 'required|string',
             'SActivo' => 'required|string',
             'DFechaIncorporacion' => 'required',
-            'tw_usuarios_id' => 'required'
+            'tw_usuarios_id' => 'required',
         ];
 
         $input = $request->all();
@@ -153,5 +152,11 @@ class TwCorporativosController extends Controller
         } else {
             return response()->json(['success' => true, 'data' => 'NOT FOUND'], 404);
         }
+    }
+
+    public function obtenerCorporativo($id)
+    {
+        $doc = tw_corporativos::find($id);
+        return response()->json(['success' => true, 'data' => new TwCorporativoResource($doc)], 202);
     }
 }

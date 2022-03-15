@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TwDocumentosCorporativoCollection;
 use App\tw_documentos_corporativos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -17,7 +18,7 @@ class TwDocumentosCorporativosController extends Controller
     {
         return response()->json([
             'success' => false,
-            'data' => tw_documentos_corporativos::paginate(5),
+            'data' => new TwDocumentosCorporativoCollection(tw_documentos_corporativos::orderBy('id', 'asc')->simplePaginate(5)),
         ], 200);
     }
 
