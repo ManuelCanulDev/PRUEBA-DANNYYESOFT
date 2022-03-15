@@ -1,5 +1,6 @@
 <?php
 
+use App\tw_corporativos;
 use Illuminate\Database\Seeder;
 
 class TwCorporativosSeeder extends Seeder
@@ -11,6 +12,6 @@ class TwCorporativosSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(tw_corporativos::class, 10)->create();
     }
 }
