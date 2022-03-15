@@ -23,3 +23,4 @@ Route::group([
 Route::resource('tw_documentos','TwDocumentosController')->middleware('auth:api');
 Route::resource('tw_users','UserController')->middleware('auth:api');
 Route::resource('tw_corporativos','TwCorporativosController')->middleware('auth:api');
+Route::resource('tw_contratos_corporativos','TwContratosCorporativosController')->middleware('auth:api');

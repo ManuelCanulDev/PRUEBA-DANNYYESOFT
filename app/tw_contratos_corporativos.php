@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class tw_contratos_corporativos extends Model
 {
-    //
+    public $timestamps = false;
 }
