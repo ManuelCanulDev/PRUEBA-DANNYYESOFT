@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TwEmpresaCorporativosCollection;
+use App\Http\Resources\TwEmpresaCorporativosResource;
 use App\tw_empresas_corporativos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -17,7 +19,7 @@ class TwEmpresasCorporativosController extends Controller
     {
         return response()->json([
             'success' => false,
-            'data' => tw_empresas_corporativos::paginate(5),
+            'data' => new TwEmpresaCorporativosCollection(tw_empresas_corporativos::paginate(5)),
         ], 200);
     }
 
@@ -76,7 +78,7 @@ class TwEmpresasCorporativosController extends Controller
         if (tw_empresas_corporativos::find($id)) {
             return response()->json([
                 'success' => true,
-                'data' => tw_empresas_corporativos::find($id),
+                'data' => new TwEmpresaCorporativosResource(tw_empresas_corporativos::find($id)),
             ], 200);
         } else {
             return response()->json([

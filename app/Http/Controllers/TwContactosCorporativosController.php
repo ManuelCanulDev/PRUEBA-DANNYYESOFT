@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TwContactosCorporativosResource;
 use App\tw_contactos_corporativos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -68,7 +69,7 @@ class TwContactosCorporativosController extends Controller
         if (tw_contactos_corporativos::find($id)) {
             return response()->json([
                 'success' => true,
-                'data' => tw_contactos_corporativos::find($id),
+                'data' => new TwContactosCorporativosResource(tw_contactos_corporativos::find($id)),
             ], 200);
         } else {
             return response()->json([

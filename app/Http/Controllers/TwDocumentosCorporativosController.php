@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\TwDocumentosCorporativoCollection;
+use App\Http\Resources\TwDocumentosCorporativoResource;
 use App\tw_documentos_corporativos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -64,7 +65,7 @@ class TwDocumentosCorporativosController extends Controller
         if (tw_documentos_corporativos::find($id)) {
             return response()->json([
                 'success' => true,
-                'data' => tw_documentos_corporativos::find($id),
+                'data' => new TwDocumentosCorporativoResource(tw_documentos_corporativos::find($id)),
             ], 200);
         } else {
             return response()->json([

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\TwCorporativoResource;
+use App\Http\Resources\TwCorporativosCollection;
 use App\tw_corporativos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +19,7 @@ class TwCorporativosController extends Controller
     {
         return response()->json([
             'success' => false,
-            'data' => tw_corporativos::paginate(5),
+            'data' => new TwCorporativosCollection(tw_corporativos::paginate(5)),
         ], 200);
     }
 

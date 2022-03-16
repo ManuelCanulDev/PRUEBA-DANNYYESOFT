@@ -4,9 +4,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class TwDocumentosCorporativoCollection extends ResourceCollection
+class TwCorporativosCollection extends ResourceCollection
 {
-    public $collects = TwDocumentosCorporativoResource::class;
+    public $collects = TwCorporativoV2Resource::class;
 
     public function toArray($request)
     {

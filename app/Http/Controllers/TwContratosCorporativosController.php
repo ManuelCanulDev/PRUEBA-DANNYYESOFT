@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TwContratoCorporativosCollection;
+use App\Http\Resources\TwContratoCorporativosResource;
 use App\tw_contratos_corporativos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -17,7 +19,7 @@ class TwContratosCorporativosController extends Controller
     {
         return response()->json([
             'success' => false,
-            'data' => tw_contratos_corporativos::paginate(5),
+            'data' => new TwContratoCorporativosCollection(tw_contratos_corporativos::paginate(5)),
         ], 200);
     }
 
@@ -65,7 +67,7 @@ class TwContratosCorporativosController extends Controller
         if (tw_contratos_corporativos::find($id)) {
             return response()->json([
                 'success' => true,
-                'data' => tw_contratos_corporativos::find($id),
+                'data' => new TwContratoCorporativosResource(tw_contratos_corporativos::find($id)),
             ], 200);
         } else {
             return response()->json([
