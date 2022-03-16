@@ -22,3 +22,11 @@ Paso 5: <br>
 Paso 6: <br>
 `Ejecutar el servidor con: php artisan serve` <br/>
 ___
+
+## Enlace para documentación de los ENDPOINTS
+Aquí: https://www.getpostman.com/collections/270e05c00893bc80c094
+
+<br>
+
+## Archivo JSON generado por Postman para la documentación de los ENDPOINTS
+[Aquí](/postman/PRUEBAS_DANYSOFT.postman_collection.json)
