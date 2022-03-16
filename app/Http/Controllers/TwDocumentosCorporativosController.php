@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\TwDocumentosCorporativoCollection;
 use App\Http\Resources\TwDocumentosCorporativoResource;
+use App\Http\Resources\TwDocumentosCorporativosCustomerResource;
+use App\tw_documentos;
 use App\tw_documentos_corporativos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -128,5 +130,13 @@ class TwDocumentosCorporativosController extends Controller
         } else {
             return response()->json(['success' => true, 'data' => 'NOT FOUND'], 404);
         }
+    }
+
+    public function obtenerDocumentos($id)
+    {
+        return response()->json([
+            'success' => false,
+            'data' => new TwDocumentosCorporativoCollection(tw_documentos_corporativos::where('tw_documentos_id',$id)->get()),
+        ], 200);
     }
 }

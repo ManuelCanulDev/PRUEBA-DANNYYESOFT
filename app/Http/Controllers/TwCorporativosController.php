@@ -52,14 +52,14 @@ class TwCorporativosController extends Controller
         } else {
 
             $corporativo = new tw_corporativos();
-            $corporativo->S_NombreCorto = $request->SNombreCorto;
-            $corporativo->S_NombreCompleto = $request->SNombreCompleto;
+            $corporativo->S_NombreCorto = $request->S_NombreCorto;
+            $corporativo->S_NombreCompleto = $request->S_NombreCompleto;
             $corporativo->S_LogoURL = $request->S_LogoURL;
-            $corporativo->S_DBName = $request->SDBName;
-            $corporativo->S_DBUsuario = $request->SDBUsuario;
-            $corporativo->S_DBPassword = $request->SDBPassword;
-            $corporativo->S_SystemUrl = $request->SSystemUrl;
-            $corporativo->S_Activo = $request->SActivo;
+            $corporativo->S_DBName = $request->S_DBName;
+            $corporativo->S_DBUsuario = $request->S_DBUsuario;
+            $corporativo->S_DBPassword = $request->S_DBPassword;
+            $corporativo->S_SystemUrl = $request->S_SystemUrl;
+            $corporativo->S_Activo = $request->S_Activo;
             $corporativo->D_FechaIncorporacion = $request->D_FechaIncorporacion;
             $corporativo->tw_usuarios_id = $request->tw_usuarios_id;
             $corporativo->FK_Asignado_id = $request->FK_Asignado_id;
@@ -100,14 +100,14 @@ class TwCorporativosController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'SNombreCorto' => 'required|string',
-            'SNombreCompleto' => 'required|string',
-            'SDBName' => 'required|string',
-            'SDBUsuario' => 'required|string',
-            'SDBPassword' => 'required|string',
-            'SSystemUrl' => 'required|string',
-            'SActivo' => 'required|string',
-            'DFechaIncorporacion' => 'required',
+            'S_NombreCorto' => 'required|string',
+            'S_NombreCompleto' => 'required|string',
+            'S_DBName' => 'required|string',
+            'S_DBUsuario' => 'required|string',
+            'S_DBPassword' => 'required|string',
+            'S_SystemUrl' => 'required|string',
+            'S_Activo' => 'required|string',
+            'D_FechaIncorporacion' => 'required',
             'tw_usuarios_id' => 'required',
         ];
 
@@ -120,14 +120,14 @@ class TwCorporativosController extends Controller
         } else {
 
             $corporativo = tw_corporativos::find($id);
-            $corporativo->S_NombreCorto = $request->get('SNombreCorto');
-            $corporativo->S_NombreCompleto = $request->get('SNombreCompleto');
+            $corporativo->S_NombreCorto = $request->get('S_NombreCorto');
+            $corporativo->S_NombreCompleto = $request->get('S_NombreCompleto');
             $corporativo->S_LogoURL = $request->get('S_LogoURL');
-            $corporativo->S_DBName = $request->get('SDBName');
-            $corporativo->S_DBUsuario = $request->get('SDBUsuario');
-            $corporativo->S_DBPassword = $request->get('SDBPassword');
-            $corporativo->S_SystemUrl = $request->get('SSystemUrl');
-            $corporativo->S_Activo = $request->get('SActivo');
+            $corporativo->S_DBName = $request->get('S_DBName');
+            $corporativo->S_DBUsuario = $request->get('S_DBUsuario');
+            $corporativo->S_DBPassword = $request->get('S_DBPassword');
+            $corporativo->S_SystemUrl = $request->get('S_SystemUrl');
+            $corporativo->S_Activo = $request->get('S_Activo');
             $corporativo->D_FechaIncorporacion = $request->get('D_FechaIncorporacion');
             $corporativo->tw_usuarios_id = $request->get('tw_usuarios_id');
             $corporativo->FK_Asignado_id = $request->get('FK_Asignado_id');
@@ -158,6 +158,10 @@ class TwCorporativosController extends Controller
     public function obtenerCorporativo($id)
     {
         $doc = tw_corporativos::find($id);
-        return response()->json(['success' => true, 'data' => new TwCorporativoResource($doc)], 202);
+        if($doc){
+            return response()->json(['success' => true, 'data' => new TwCorporativoResource($doc)], 200);
+        }else{
+            return response()->json(['success' => true, 'data' => 'NOT FOUND'], 404);
+        }
     }
 }
