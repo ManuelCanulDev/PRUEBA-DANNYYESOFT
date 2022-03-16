@@ -43,7 +43,7 @@ class TwDocumentosCorporativosController extends Controller
         $validator = Validator::make($input, $rules);
 
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'error' => $validator->errors()->all()], 406);
+            return response()->json(['success' => false, 'error' => $validator->errors()->all()], 422);
         } else {
 
             $tw_documentos_corporativos = new tw_documentos_corporativos();
@@ -52,7 +52,7 @@ class TwDocumentosCorporativosController extends Controller
             $tw_documentos_corporativos->S_ArchivoUrl = $request->S_ArchivoUrl;
             $tw_documentos_corporativos->save();
 
-            return response()->json(['success' => true, 'data' => $tw_documentos_corporativos], 200);
+            return response()->json(['success' => true, 'data' => $tw_documentos_corporativos], 201);
         }
     }
 
@@ -72,7 +72,7 @@ class TwDocumentosCorporativosController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'data' => [],
+                'data' => 'NOT FOUND'
             ], 404);
         }
     }
@@ -99,7 +99,7 @@ class TwDocumentosCorporativosController extends Controller
             $validator = Validator::make($input, $rules);
 
             if ($validator->fails()) {
-                return response()->json(['success' => false, 'error' => $validator->errors()->all()], 406);
+                return response()->json(['success' => false, 'error' => $validator->errors()->all()], 422);
             } else {
                 $tw_documentos_corporativos = tw_documentos_corporativos::find($id);
                 $tw_documentos_corporativos->tw_corporativos_id = $request->tw_corporativos_id;
@@ -107,7 +107,7 @@ class TwDocumentosCorporativosController extends Controller
                 $tw_documentos_corporativos->S_ArchivoUrl = $request->S_ArchivoUrl;
                 $tw_documentos_corporativos->save();
 
-                return response()->json(['success' => true, 'data' => $tw_documentos_corporativos], 200);
+                return response()->json(['success' => true, 'data' => $tw_documentos_corporativos], 202);
             }
         } else {
             return response()->json(['success' => true, 'data' => 'NOT FOUND'], 404);

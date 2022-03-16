@@ -44,7 +44,7 @@ class UserController extends Controller
         $validator = Validator::make($input, $rules);
 
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'error' => $validator->errors()->all()], 406);
+            return response()->json(['success' => false, 'error' => $validator->errors()->all()], 422);
         } else {
 
             $user = new User();
@@ -59,7 +59,7 @@ class UserController extends Controller
             $user->verified = $request->verified;
             $user->save();
 
-            return response()->json(['success' => true, 'data' => $user], 200);
+            return response()->json(['success' => true, 'data' => $user], 201);
         }
     }
 
@@ -79,7 +79,7 @@ class UserController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'data' => [],
+                'data' => 'NOT FOUND'
             ], 404);
         }
 
@@ -110,7 +110,7 @@ class UserController extends Controller
             $validator = Validator::make($input, $rules);
 
             if ($validator->fails()) {
-                return response()->json(['success' => false, 'error' => $validator->errors()->all()], 406);
+                return response()->json(['success' => false, 'error' => $validator->errors()->all()], 422);
             } else {
                 $user = User::find($id);
                 $user->username = $request->get('username');
@@ -124,7 +124,7 @@ class UserController extends Controller
                 $user->verified = $request->get('verified');
                 $user->save();
 
-                return response()->json(['success' => true, 'data' => $user], 200);
+                return response()->json(['success' => true, 'data' => $user], 202);
             }
         } else {
             return response()->json(['success' => true, 'data' => 'NOT FOUND'], 404);

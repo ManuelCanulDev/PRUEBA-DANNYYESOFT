@@ -41,7 +41,7 @@ class TwContactosCorporativosController extends Controller
         $validator = Validator::make($input, $rules);
 
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'error' => $validator->errors()->all()], 406);
+            return response()->json(['success' => false, 'error' => $validator->errors()->all()], 422);
         } else {
 
             $tw_contratos_corporativos = new tw_contactos_corporativos();
@@ -54,7 +54,7 @@ class TwContactosCorporativosController extends Controller
             $tw_contratos_corporativos->tw_corporativos_id = $request->tw_corporativos_id;
             $tw_contratos_corporativos->save();
 
-            return response()->json(['success' => true, 'data' => $tw_contratos_corporativos], 200);
+            return response()->json(['success' => true, 'data' => $tw_contratos_corporativos], 201);
         }
     }
 
@@ -74,7 +74,7 @@ class TwContactosCorporativosController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'data' => [],
+                'data' => 'NOT FOUND'
             ], 404);
         }
     }
@@ -102,7 +102,7 @@ class TwContactosCorporativosController extends Controller
             $validator = Validator::make($input, $rules);
 
             if ($validator->fails()) {
-                return response()->json(['success' => false, 'error' => $validator->errors()->all()], 406);
+                return response()->json(['success' => false, 'error' => $validator->errors()->all()], 422);
             } else {
                 $tw_contactos_corporativos = tw_contactos_corporativos::find($id);
                 $tw_contactos_corporativos->S_Nombre = $request->S_Nombre;
@@ -114,7 +114,7 @@ class TwContactosCorporativosController extends Controller
                 $tw_contactos_corporativos->tw_corporativos_id = $request->tw_corporativos_id;
                 $tw_contactos_corporativos->save();
 
-                return response()->json(['success' => true, 'data' => $tw_contactos_corporativos], 200);
+                return response()->json(['success' => true, 'data' => $tw_contactos_corporativos], 202);
             }
         } else {
             return response()->json(['success' => true, 'data' => 'NOT FOUND'], 404);

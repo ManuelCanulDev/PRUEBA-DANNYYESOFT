@@ -48,7 +48,7 @@ class TwCorporativosController extends Controller
         $validator = Validator::make($input, $rules);
 
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'error' => $validator->errors()->all()], 406);
+            return response()->json(['success' => false, 'error' => $validator->errors()->all()], 422);
         } else {
 
             $corporativo = new tw_corporativos();
@@ -65,7 +65,7 @@ class TwCorporativosController extends Controller
             $corporativo->FK_Asignado_id = $request->FK_Asignado_id;
             $corporativo->save();
 
-            return response()->json(['success' => true, 'data' => $corporativo], 200);
+            return response()->json(['success' => true, 'data' => $corporativo], 201);
         }
     }
 
@@ -85,7 +85,7 @@ class TwCorporativosController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'data' => [],
+                'data' => 'NOT FOUND'
             ], 404);
         }
     }
@@ -116,7 +116,7 @@ class TwCorporativosController extends Controller
         $validator = Validator::make($input, $rules);
 
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'error' => $validator->errors()->all()], 406);
+            return response()->json(['success' => false, 'error' => $validator->errors()->all()], 422);
         } else {
 
             $corporativo = tw_corporativos::find($id);
@@ -133,7 +133,7 @@ class TwCorporativosController extends Controller
             $corporativo->FK_Asignado_id = $request->get('FK_Asignado_id');
             $corporativo->save();
 
-            return response()->json(['success' => true, 'data' => $corporativo], 200);
+            return response()->json(['success' => true, 'data' => $corporativo], 202);
         }
     }
 

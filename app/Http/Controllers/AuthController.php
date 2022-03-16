@@ -23,7 +23,10 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
             'verified' => now(),
         ]);
-        $user->save();return response()->json([
+
+        $user->save();
+
+        return response()->json([
             'message' => 'Usuario Creado Satisfactoriamente!',
         ], 201);
     }
@@ -42,12 +45,15 @@ class AuthController extends Controller
         }
 
         $user = $request->user();
+
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;if ($request->remember_me) {
             $token->expires_at = Carbon::now()->addWeeks(1);
         }
 
-        $token->save();return response()->json([
+        $token->save();
+
+        return response()->json([
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(
@@ -58,9 +64,11 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->token()->revoke();return response()->json([
+        $request->user()->token()->revoke();
+
+        return response()->json([
             'message' => 'Cerrado de Sesión Satisfactorio.',
-        ]);
+        ], 200);
     }
 
     public function user(Request $request)

@@ -40,7 +40,7 @@ class TwDocumentosController extends Controller
         $validator = Validator::make($input, $rules);
 
         if ($validator->fails()) {
-            return response()->json(['success' => false, 'error' => $validator->errors()->all()], 406);
+            return response()->json(['success' => false, 'error' => $validator->errors()->all()], 422);
         } else {
 
             $tw_documento = new tw_documentos();
@@ -49,7 +49,7 @@ class TwDocumentosController extends Controller
             $tw_documento->S_Descripcion = $request->S_Descripcion;
             $tw_documento->save();
 
-            return response()->json(['success' => true, 'data' => $tw_documento], 200);
+            return response()->json(['success' => true, 'data' => $tw_documento], 201);
         }
     }
 
@@ -69,7 +69,7 @@ class TwDocumentosController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'data' => [],
+                'data' => 'NOT FOUND'
             ], 404);
         }
 
@@ -98,7 +98,7 @@ class TwDocumentosController extends Controller
             $validator = Validator::make($input, $rules);
 
             if ($validator->fails()) {
-                return response()->json(['success' => false, 'error' => $validator->errors()->all()], 406);
+                return response()->json(['success' => false, 'error' => $validator->errors()->all()], 422);
             } else {
                 $tw_documento = tw_documentos::find($id);
                 $tw_documento->S_Nombre = $request->get('S_Nombre');
@@ -106,7 +106,7 @@ class TwDocumentosController extends Controller
                 $tw_documento->S_Descripcion = $request->get('S_Descripcion');
                 $tw_documento->save();
 
-                return response()->json(['success' => true, 'data' => $tw_documento], 200);
+                return response()->json(['success' => true, 'data' => $tw_documento], 202);
             }
         } else {
             return response()->json(['success' => true, 'data' => 'NOT FOUND'], 404);
